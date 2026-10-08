@@ -14,6 +14,21 @@
 
 #include <commctrl.h>
 
+// MinGW-w64 hides the legacy 32-bit window/instance offset constants behind
+// _WIN32_WINNT < 0x0500; re-provide them for the 32-bit code paths below.
+#ifndef GWL_USERDATA
+#define GWL_USERDATA GWLP_USERDATA
+#endif
+#ifndef GWL_HINSTANCE
+#define GWL_HINSTANCE GWLP_HINSTANCE
+#endif
+#ifndef GWL_WNDPROC
+#define GWL_WNDPROC GWLP_WNDPROC
+#endif
+#ifndef DWL_MSGRESULT
+#define DWL_MSGRESULT DWLP_MSGRESULT
+#endif
+
 namespace helper {
 
 template<typename T> inline T *SafeGetWindowUserData(HWND hwnd)
